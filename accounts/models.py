@@ -27,7 +27,6 @@ class customer(models.Model):
     name    = models.CharField(max_length = 50)
     contact = models.CharField(max_length=10,validators=[MinLengthValidator(10)])
     address = models.CharField( max_length = 250)
-    emp_id = models.ForeignKey(employee,on_delete = models.CASCADE)
 
 
 class sales(models.Model):

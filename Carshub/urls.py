@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+
 urlpatterns = [
     path('innovators/', admin.site.urls),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('general/',include('general.urls')),
+    path('accounts/',include('accounts.urls'))
 ]

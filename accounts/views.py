@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import employee_form_create,employeeProfileForm
 
 # Create your views here.
 def employeesignup(request):
@@ -27,5 +28,5 @@ def employeesignup(request):
     else :
         employee_form = employee_form_create()
         employee_profile_form = employeeProfileForm()
-    return render(request,'accounts/signup.html',{'form': employee_form,
+    return render(request,'accounts/employees.html',{'form': employee_form,
                                                   'profile_form':employee_profile_form})
