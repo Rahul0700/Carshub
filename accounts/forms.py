@@ -24,8 +24,6 @@ class employee_form_create(UserCreationForm):
 
 #Customer form
 
-
-
 class employeeProfileForm(ModelForm):
     class Meta:
         fields = ('contact','is_manager')
