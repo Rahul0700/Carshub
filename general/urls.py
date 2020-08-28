@@ -5,4 +5,5 @@ app_name = 'general'
 
 urlpatterns = [
     path('customerdetails/',views.customersignup,name='booking'),
+    path('newsale/',views.addsale,name="sales")
 ]

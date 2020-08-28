@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import employee_form_create,employeeProfileForm
+from .forms import employee_form_create,employeeProfileForm,employeedetails
 
 # Create your views here.
 def employeesignup(request):
@@ -30,3 +30,15 @@ def employeesignup(request):
         employee_profile_form = employeeProfileForm()
     return render(request,'accounts/employees.html',{'form': employee_form,
                                                   'profile_form':employee_profile_form})
+
+def homepage(request):
+    return render(request,'index.html')
+
+def employee_money(request):
+    if request.method == 'POST':
+        employee_form = employeedetails(data=request.POST)
+        if employee_form.is_valid():
+            info_form = employee_form.save(commit=False)
+    else :
+        employee_form = employeedetails()
+    return render(request,'accounts/employees.html',{'form': employee_form})

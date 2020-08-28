@@ -1,4 +1,4 @@
-from .models import employee# DB models
+from .models import employee,employee_performance# DB models
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ValidationError,EmailField,ModelForm
 from django.contrib.auth import get_user_model
@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class employee_form_create(UserCreationForm):
     email = EmailField(required = True)
     class Meta:
-        fields = ('username','email','password','password2')#pasword2 is more like confirm password
+        fields = ('username','email','password1','password2')#pasword2 is more like confirm password
         model = get_user_model()#Lookup on This
 
     def __init__(self, *args, **kwargs):
@@ -25,7 +25,13 @@ class employee_form_create(UserCreationForm):
 #Customer form
 
 
+
 class employeeProfileForm(ModelForm):
     class Meta:
-        fields = ('month_sales','target','commission')
+        fields = ('contact','is_manager')
         model = employee
+
+class employeedetails(ModelForm):
+    class Meta:
+        fields = ('emp_id','month_sales','target','commission')
+        model = employee_performance
