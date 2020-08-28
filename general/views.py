@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from .forms import Customerform,newsaleform
-from accounts.models import customer
+from accounts.models import customer,inventory
 from random import randint
 # Create your views here.
 def customersignup(request):
@@ -45,3 +45,7 @@ def addsale(request):
     else:
         form = newsaleform()
     return render(request,'general/sale_form.html',{'form':form})
+
+def inventory_showcase(request):
+        storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
+        return render(request,'inventory.html',{ 'inventory': storage})
