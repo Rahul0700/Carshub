@@ -17,7 +17,6 @@ class employee(models.Model):
     emp_id = models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length = 40)
     contact = models.CharField(max_length=10,validators=[MinLengthValidator(10)])
-    car_id = models.ForeignKey(inventory, on_delete = models.CASCADE)
     is_manager = models.BooleanField(default = False)
 
 class employee_performance(models.Model):

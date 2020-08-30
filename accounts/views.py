@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .forms import employee_form_create,employeeProfileForm,employeedetails
-
+from random import randint
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 def employeesignup(request):
     if request.method == 'POST':
@@ -22,9 +25,12 @@ def employeesignup(request):
                     integrity = True
             if integrity:
                 info_form.username = code
-                details_form.employee = info_form
+                details_form.emp_id = info_form
+                messages.success(request,'Your employee ID is : %s'%code)
                 info_form.save()
                 details_form.save()
+                return HttpResponseRedirect(reverse('accounts:login'))
+
     else :
         employee_form = employee_form_create()
         employee_profile_form = employeeProfileForm()
