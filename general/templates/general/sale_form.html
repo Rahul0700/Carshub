@@ -18,6 +18,7 @@
       {{ form }}
       <button type="submit" name="button">Submit</button>
     </form>
+    <a href="{% url 'general:add_inventory' %}"> Add inventory </a>
     <h1> Inventory Check </h1>
     <form method="get">
         {% csrf_token %}
@@ -29,6 +30,7 @@
     {% for invent in inventory %}
     {{ invent.model }}
     {% endfor %}
+    <br>
     <a href="{% url 'general:alter_inventory' %}"> Click here to make changes to inventory</a>
   </body>
 </html>

@@ -25,7 +25,7 @@ def customersignup(request):
             upload_form.customer = form
             upload_form.cus_id  = code
             upload_form.save()
-            #return HttpResponseRedirect(reverse('general:sales'))
+            return HttpResponseRedirect(reverse('general:sales'))
     else:
         form = Customerform()
     return render(request,'general/booking_form.html',{'form':form})
@@ -80,9 +80,10 @@ def inventory_add(request):
             upload_form.sales = form
             upload_form.car_id  = code
             upload_form.save()
+            #messages.success(request,'Car with CAR_ID  %s added'%code)
     else:
         form = add_inventory()
-    return render(request,'accounts/login.html',{'form':form})
+    return render(request,'general/add_inventory.html',{'form':form})
 
 
 #
@@ -97,33 +98,34 @@ def inventory_add(request):
 #                                             #and built_year>=%d and built_year<=%d '''
 #     return render(request,'inventory.html',{ 'inventory': storage})
 
-def inventory_delete(request):
-    storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
-    if request.method == "POST":
-        mod = request.POST.get("model")
-        start = request.POST.get("start_year")
-        end = request.POST.get("end_year")
-        print(start)
-        storage= inventory.objects.filter(built_year = start)
-        print(storage)
-        #if(len(storage)==0):
-        storage.delete()
-
-        # storage = inventory.objects.raw(' DELETE FROM accounts_inventory where start = %s '[start])
-    return render(request,'inventory.html',{ 'inventory': storage})
-
-def inventory_update(request):
-    storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
-    if request.method == "POST":
-        id = request.POST.get("id")
-        mod_update = request.POST.get("mod_update")
-        storage = inventory.objects.filter(car_id = id)
-        for i in storage:
-            i.model = mod_update
-            i.save()
-    return render(request,'inventory_copy.html',{ 'invent': storage})
+# def inventory_delete(request):
+#     storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
+#     if request.method == "POST":
+#         mod = request.POST.get("model")
+#         start = request.POST.get("start_year")
+#         end = request.POST.get("end_year")
+#         print(start)
+#         storage= inventory.objects.filter(built_year = start)
+#         print(storage)
+#         #if(len(storage)==0):
+#         storage.delete()
+#
+#         # storage = inventory.objects.raw(' DELETE FROM accounts_inventory where start = %s '[start])
+#     return render(request,'inventory.html',{ 'inventory': storage})
+#
+# def inventory_update(request):
+#     storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
+#     if request.method == "POST":
+#         id = request.POST.get("id")
+#         mod_update = request.POST.get("mod_update")
+#         storage = inventory.objects.filter(car_id = id)
+#         for i in storage:
+#             i.model = mod_update
+#             i.save()
+#     return render(request,'inventory_copy.html',{ 'invent': storage})
 
 def inventory_alter(request):
+#inventory Deletion
     storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
     if request.method == "POST":
         mod = request.POST.get("model")
@@ -135,6 +137,7 @@ def inventory_alter(request):
         #if(len(storage)==0):
         storage.delete()
 
+#inventory updation
     if request.method =="GET":
         id = request.POST.get("id")
         mod_update = request.POST.get("mod_update")
