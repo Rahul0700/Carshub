@@ -5,13 +5,12 @@
     <title></title>
   </head>
   <body>
-
+    <a href = "{% url 'accounts:employee_sign' %}">
+      <button type="button" class="btn btn-primary" name="button">Signup</button>
+    </a>
+    <a href="{% url 'accounts:login' %}">
+      <button type="button" class="btn btn-primary" name="button">Sign in</button>
+    </a>
+    
   </body>
-</html>
-<a href = "{% url 'accounts:employee_sign' %}">
-<button type="button" class="btn btn-primary" name="button">Signup</button>
-</a>
-
-<a href="{% url 'accounts:login' %}">
-<button type="button" class="btn btn-primary" name="button">Sign in</button>
-</a>
+  </html>

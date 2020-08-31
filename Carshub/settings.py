@@ -124,5 +124,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = [ STATIC_DIR, ]
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'general:sales'
 LOGOUT_REDIRECT_URL = 'home'

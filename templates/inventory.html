@@ -5,8 +5,22 @@
     <title></title>
   </head>
   <body>
-    {% for invent in inventory %}
-    {{ invent.inventory.model }}
-    {% endfor %}
+    <h1> Inventory Deletion </h1>
+    <form method="POST">
+      {% csrf_token %}
+      Model Name:<input type = "text" name="model"><br>
+      Start year search:<input type = "number" name="start_year"><br>
+      end year search:<input type ="number" name="end_year">
+      <input type = "submit"><br>
+    </form>
+
+    <h1> Inventory Updation</h1>
+    <form method="GET">
+      {% csrf_token %}
+      Car ID:<input type = "text" name = "id"><br>
+      New Model Name: <input type = "text" name = "mod_update"><br>
+      <input type = "submit"><br>
+    </form>
+
   </body>
 </html>
