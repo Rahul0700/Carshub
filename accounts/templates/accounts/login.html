@@ -1,8 +1,5 @@
-<!--<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
+{% extends "base.html"%}
+{% block content %}
     <style>
          body
       {
@@ -47,77 +44,7 @@
               background-color: lightgrey;
             }
     </style>
-    <title></title>
-  </head>
-  <body>
-    {% if messages %}
-     {% for message in messages %}
-       <div class="alert alert-{{ message.tags }}" role="alert">
-         {{ message }}
-       </div>
-     {% endfor %}
-   {% endif %}
-    <form method="post">
-      {% csrf_token %}
-      {{ form }}
-      <button type="submit" name="button">Submit</button>
-    </form>
-  </body>
-</html>
--->
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <style>
-         body
-      {
-        text-align: center;
-      }
-      #intro
-      {
-        text-decoration: solid underline;
-                margin: 5%20%;
-                font-size: xx-large;
-                text-align: center;
-                vertical-align: middle;
-                padding: 10px 20px 20px 10px;
-      }
-      #id_username,#id_password
-      {
-
-                width: 40%;
-                height: 20px;
-                border-radius: 40px;
-                border: 1px solid black;
-                padding: 15px;
-                font-size: larger;
-      }
-
-      button
-            {
-                background-color:blue;
-                border: none;
-                width: 70%;
-                height: 45px;
-                border-radius: 40px;
-                position: relative;
-                font-size: x-large;
-            }
-            button:hover
-            {
-                background-color:lightskyblue;
-            }
-            form{
-              margin: 20px 250px 20px 250px;
-              background-color: lightgrey;
-            }
-    </style>
-    <title></title>
-  </head>
-  <body>
-
-    {% if messages %}
+      {% if messages %}
      {% for message in messages %}
        <div class="alert alert-{{ message.tags }}" role="alert">
          {{ message }}
@@ -132,5 +59,4 @@
       {{ form.as_p }}
       <button type="submit" name="button">Submit</button>
     </form>
-  </body>
-</html>
+  {% endblock %}

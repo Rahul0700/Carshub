@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <a href = "{% url 'accounts:employee_sign' %}">
-      <button type="button" class="btn btn-primary" name="button">Signup</button>
-    </a>
-    <a href="{% url 'accounts:login' %}">
-      <button type="button" class="btn btn-primary" name="button">Sign in</button>
-    </a>
+{% extends "base.html"%}
+{% block content %}
     
-  </body>
-  </html>
+    {% endblock %}

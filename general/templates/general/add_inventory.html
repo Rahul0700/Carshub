@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends "base.html"%}
+{% block content %}
     {% if messages %}
      {% for message in messages %}
        <div class="alert alert-{{ message.tags }}" role="alert">
@@ -19,5 +14,4 @@
       <br>
       <a href="{% url 'general:sales' %}">Back to homepage</a>
     </form>
-  </body>
-</html>
+  {% endblock %}
