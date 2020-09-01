@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -9,6 +9,61 @@
         {% csrf_token %}
         {{form}}
         {{ profile_form }}
+      <button type="submit" name="button">Submit</button>
+    </form>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      input
+      {
+        border-radius: 20px;
+        padding: 5px;
+        border: 1px solid grey;
+      }
+      form
+      {
+        background-color: lightgray;
+        margin: 80px;
+        padding: 0px 40px 20px
+      }
+      #intro
+      {
+        text-decoration: solid underline;
+                margin: 5%20%;
+                font-size: xx-large;
+                text-align: center;
+                vertical-align: middle;
+                padding: 10px 20px 20px 10px;
+      }button
+            {
+                background-color:blue;
+                border: none;
+                width: 200px;
+                height: 35px;
+                border-radius: 20px;
+                position: relative;
+                font-size: x-large;
+            }
+            button:hover
+            {
+                background-color:lightskyblue;
+            }
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form method="post"  enctype="multipart/form-data">
+      <P id="intro">
+        Sign Up Page
+      </P>
+        {% csrf_token %}
+        {{form.as_p}}
+        {{ profile_form }}<br><br>
       <button type="submit" name="button">Submit</button>
     </form>
   </body>
