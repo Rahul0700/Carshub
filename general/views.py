@@ -24,6 +24,7 @@ def customersignup(request):
                     integrity = True
             upload_form.customer = form
             upload_form.cus_id  = code
+            messages.success(request,'Customer with CustomerID %s added'%code)
             upload_form.save()
             return HttpResponseRedirect(reverse('general:sales'))
     else:
@@ -31,9 +32,11 @@ def customersignup(request):
     return render(request,'general/booking_form.html',{'form':form})
 
 def addsale(request):
+    for_sake = "Nothing"
     current = employee.objects.get( emp_id = request.user )
     is_manager = current.is_manager
     if request.method == 'POST':
+
         form = newsaleform(data=request.POST)
         if form.is_valid():
             upload_form = form.save(commit=False)
@@ -57,11 +60,16 @@ def addsale(request):
         mod = request.GET.get("model")
         start = request.GET.get("start_year")
         end = request.GET.get("end_year")
-        #storage = inventory.objects.raw('SELECT * FROM accounts_inventory where model = %s and built_year = %s',[mod,start])
+        storage = inventory.objects.filter(model = mod)
+        storage = storage.filter(built_year = start)
+        if(len(storage)==0):
+            messages.warning(request,"sdgjkhfdsdfgjh")
+            for_sake = "Hey"
     print(storage)
     return render(request,'general/sale_form.html',{'form':form,
                                                     'inventory': storage,
-                                                    'is_manager': is_manager})
+                                                    'is_manager': is_manager,
+                                                    'for_sake': for_sake})
 
 def inventory_add(request):
     if request.method == 'POST':
@@ -79,8 +87,9 @@ def inventory_add(request):
                     integrity = True
             upload_form.sales = form
             upload_form.car_id  = code
+            messages.success(request,'Car ID of Car is : %s'%code)
             upload_form.save()
-            #messages.success(request,'Car with CAR_ID  %s added'%code)
+
     else:
         form = add_inventory()
     return render(request,'general/add_inventory.html',{'form':form})

@@ -5,12 +5,20 @@
     <title></title>
   </head>
   <body>
+
   {% if is_manager%}
     <a href="{% url 'accounts:performance' %}"> Manager View </a>
   {% endif %}
   <br>
   <a href="{% url 'general:booking' %}"> Add Customer </a>
-
+  <!-- Customer Addition confirmation -->
+  {% if messages%}
+   {% for message in messages %}
+     <div class="alert alert-{{ message.tags }}" role="alert">
+       {{ message }}
+     </div>
+   {% endfor %}
+ {% endif %}
 
   <h1> Add sale</h1>
     <form method="post">
@@ -30,6 +38,14 @@
     {% for invent in inventory %}
     {{ invent.model }}
     {% endfor %}
+    <!--Alert messages for empty inventory-->
+    {% if messages and for_sake == "Hey" %}
+     {% for message in messages %}
+       <div class="alert alert-{{ message.tags }}" role="alert">
+         {{ message }}
+       </div>
+     {% endfor %}
+   {% endif %}
     <br>
     <a href="{% url 'general:alter_inventory' %}"> Click here to make changes to inventory</a>
   </body>

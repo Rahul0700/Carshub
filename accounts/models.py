@@ -11,7 +11,8 @@ class inventory(models.Model):
     is_testdrive = models.BooleanField()
     is_sold = models.BooleanField()
     price = models.PositiveBigIntegerField()
-
+    def __str__(self):
+        return self.car_id
 
 class employee(models.Model):
     emp_id = models.OneToOneField(User,on_delete=models.CASCADE)
