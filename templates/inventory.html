@@ -1,20 +1,57 @@
 {% extends "base.html"%}
 {% block content %}
-    <h1> Inventory Deletion </h1>
+<style>
+  input
+      {
+        border-radius: 20px;
+        padding: 5px;
+        border: 1px solid grey;
+      }
+      form
+      {
+        background-color: lightgray;
+        margin: 80px;
+        padding: 0px 40px 20px
+      }
+      #intro
+      {
+        text-decoration: solid underline;
+                margin: 5%20%;
+                font-size: xx-large;
+                text-align: center;
+                vertical-align: middle;
+                padding: 10px 20px 20px 10px;
+      }button
+            {
+                background-color:blue;
+                border: none;
+                width: 200px;
+                height: 35px;
+                border-radius: 20px;
+                position: relative;
+                font-size: x-large;
+            }
+            button:hover
+            {
+                background-color:lightskyblue;
+            }
+</style>
+<br>
+    <h1 style="text-align:center;"> Inventory Deletion </h1>
     <form method="POST">
-      {% csrf_token %}
-      Model Name:<input type = "text" name="model"><br>
-      Start year search:<input type = "number" name="start_year"><br>
-      end year search:<input type ="number" name="end_year">
-      <input type = "submit"><br>
+      {% csrf_token %}<br>
+      Model Name:<input type = "text" name="model"><br><br>
+      Start year search:<input type = "number" name="start_year"><br><br>
+      end year search:<input type ="number" name="end_year"><br><br>
+      <input type = "submit" style="background-color: blue;"><br>
     </form>
-
-    <h1> Inventory Updation</h1>
+<br>
+    <h1 style="text-align: center;"> Inventory Updation</h1>
     <form method="GET">
-      {% csrf_token %}
-      Car ID:<input type = "text" name = "id"><br>
-      New Model Name: <input type = "text" name = "mod_update"><br>
-      <input type = "submit"><br>
+      {% csrf_token %}<br>
+      Car ID:<input type = "text" name = "id"><br><br>
+      New Model Name: <input type = "text" name = "mod_update"><br><br>
+      <input type = "submit" style="background-color: blue;"><br>
     </form>
-    <a href="{% url 'general:sales' %}">Back to home </a>
+    <a href="{% url 'general:sales' %}" style="color: black;">Back to home </a>
   {% endblock %}

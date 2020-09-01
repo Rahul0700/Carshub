@@ -1,5 +1,33 @@
 {% extends "base.html"%}
 {% block content %}
+<style>
+  button
+            {
+                background-color:blue;
+                border: none;
+                width: 100px;
+                height: 35px;
+                border-radius: 20px;
+                position: relative;
+                
+            }
+            button:hover
+            {
+                background-color:lightskyblue;
+            }
+            input
+      {
+        border-radius: 20px;
+        padding: 5px;
+        border: 1px solid grey;
+      }
+      form
+      {
+        background-color: lightgray;
+        margin: 80px;
+        padding: 20px 40px 20px
+      }
+</style>
     <form method="post">
       {% csrf_token %}
       {{ form }}

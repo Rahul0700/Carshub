@@ -1,5 +1,32 @@
 {% extends "base.html"%}
 {% block content %}
+<style>
+  input
+      {
+        border-radius: 20px;
+        padding: 5px;
+        border: 1px solid grey;
+      }
+      form
+      {
+        background-color: lightgray;
+        margin: 80px;
+        padding: 20px 40px 20px
+      }
+      button
+            {
+                background-color:blue;
+                border: none;
+                width: 100px;
+                height: 35px;
+                border-radius: 20px;
+                position: relative;
+            }
+            button:hover
+            {
+                background-color:lightskyblue;
+            }
+</style>
     {% if messages %}
      {% for message in messages %}
        <div class="alert alert-{{ message.tags }}" role="alert">

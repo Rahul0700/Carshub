@@ -1,10 +1,38 @@
 {% extends "base.html"%}
 {% block content %}
+<style>
+  input
+      {
+        border-radius: 15px;
+        padding: 5px;
+        border: 1px solid grey;
+      }
+      form
+      {
+        background-color: lightgray;
+        margin: 30px;
+        padding: 10px 40px 20px
+      }
+      button
+            {
+                background-color:blue;
+                border: none;
+                width: 100px;
+                height: 35px;
+                border-radius: 20px;
+                position: relative;
+                 text-align: center;
+            }
+            button:hover
+            {
+                background-color:lightskyblue;
+            }
+</style>
   {% if is_manager%}
-    <a href="{% url 'accounts:performance' %}"> Manager View </a>
+    <a href="{% url 'accounts:performance' %}" style="color: black;"> Manager View </a>
   {% endif %}
   <br>
-  <a href="{% url 'general:booking' %}"> Add Customer </a>
+  <a href="{% url 'general:booking' %}" style="color: black;"> Add Customer </a>
   <!-- Customer Addition confirmation -->
   {% if messages%}
    {% for message in messages %}
@@ -20,14 +48,14 @@
       {{ form }}
       <button type="submit" name="button">Submit</button>
     </form>
-    <a href="{% url 'general:add_inventory' %}"> Add inventory </a>
+    <a href="{% url 'general:add_inventory' %}" style="color: black;"> Add inventory </a>
     <h1> Inventory Check </h1>
     <form method="get">
         {% csrf_token %}
-        Model Name:<input type = "text" name="model"><br>
-        Start year search:<input type = "number" name="start_year"><br>
+        Model Name:<input type = "text" name="model"><br><br>
+        Start year search:<input type = "number" name="start_year"><br><br>
         end year search:<input type ="number" name="end_year">
-        <input type = "submit"><br>
+        <input type = "submit" style="background-color: blue; width: 100px;"><br>
     </form>
     {% for invent in inventory %}
     {{ invent.model }}
@@ -41,5 +69,5 @@
      {% endfor %}
    {% endif %}
     <br>
-    <a href="{% url 'general:alter_inventory' %}"> Click here to make changes to inventory</a>
+    <a href="{% url 'general:alter_inventory' %}" style="color: black;"> Click here to make changes to inventory</a>
   {% endblock %}
