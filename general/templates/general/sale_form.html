@@ -36,9 +36,12 @@
   <!-- Customer Addition confirmation -->
   {% if messages%}
    {% for message in messages %}
+   {% if message.tags == "success" %}
+
      <div class="alert alert-{{ message.tags }}" role="alert">
        {{ message }}
      </div>
+    {% endif %}
    {% endfor %}
  {% endif %}
 
@@ -57,16 +60,38 @@
         end year search:<input type ="number" name="end_year">
         <input type = "submit" style="background-color: blue; width: 100px;"><br>
     </form>
-    {% for invent in inventory %}
-    {{ invent.model }}
+    <table>
+      <thead>
+          <th> car_id </th>
+          <th> Model </th>
+          <th> Year built </th>
+          <th> Petrol </th>
+          <th> Diesel </th>
+          <th> Testdrive model </th>
+      <thead>
+      {% for invent in inventory %}
+    <tr>
+      <td> {{ invent.car_id }}</td>
+      <td>{{ invent.model }}</td>
+      <td>{{ invent.built_year }}</td>
+      <td>{{ invent.is_petrol }}</td>
+      <td>{{ invent.is_diesel }}</td>
+      <td>{{ invent.is_testdrive }}</td>
+      <td>{{ invent.price }}</td>
+    </tr>
     {% endfor %}
+
+  </table>
+
     <!--Alert messages for empty inventory-->
     {% if messages and for_sake == "Hey" %}
      {% for message in messages %}
+     {% if message.tags == "warning" %}
        <div class="alert alert-{{ message.tags }}" role="alert">
          {{ message }}
        </div>
-     {% endfor %}
+    {% endif %}
+    {% endfor %}
    {% endif %}
     <br>
     <a href="{% url 'general:alter_inventory' %}" style="color: black;"> Click here to make changes to inventory</a>

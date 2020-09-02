@@ -12,5 +12,5 @@ class newsaleform(ModelForm):
 
 class add_inventory(ModelForm):
     class Meta:
-        fields = ("model","built_year","built_year","is_petrol","is_diesel","is_testdrive","is_sold","price")
+        fields = ("model","built_year","is_petrol","is_testdrive","is_sold","price")
         model = inventory

@@ -37,8 +37,31 @@
     <form method="post">
       {% csrf_token %}
       {{ form }}
-      <button type="submit" name="button">Submit</button>
+      Red  <input type="checkbox" value="red" name="red" class="color">
+      Black  <input type = "checkbox" value="black" name="black" class="color">
+      Blue <input type="checkbox" value="blue" name="blue" class="color">
+      <input type="text" hidden="True" value="" id="color_hidden" name="hidden_unit">
+      <button type="submit" name="button" onclick = "qwert()" >Submit</button>
       <br>
       <a href="{% url 'general:sales' %}">Back to homepage</a>
     </form>
+    <script type="text/javascript">
+    function qwert()
+    {
+      console.log("Pritish");
+      var color = document.getElementsByClassName("color");
+      var i=0;
+      var j=0;
+      var arr = Array()
+      for(i=0;i<color.length;i++)
+      {
+        if(color[i].checked)
+        {
+          arr[j]=color[i].value;
+          j++;
+        }
+      };
+      console.log(arr);document.getElementById("color_hidden").value = arr;
+    }
+    </script>
   {% endblock %}
