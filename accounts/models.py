@@ -8,6 +8,7 @@ class color(models.Model):
     blue = models.BooleanField()
 
 class inventory(models.Model):
+    slug = models.SlugField(unique=True,null=True)
     car_id = models.CharField(max_length = 6)
     model = models.CharField(max_length = 20 )
     built_year = models.PositiveSmallIntegerField()
@@ -15,11 +16,17 @@ class inventory(models.Model):
     is_testdrive = models.BooleanField()
     is_sold = models.BooleanField()
     price = models.PositiveBigIntegerField()
-    color = models.ForeignKey(color, on_delete = models.CASCADE, null =True ,blank = True)
+    color = models.OneToOneField(color, on_delete = models.CASCADE, null =True ,blank = True)
     def __str__(self):
         return self.car_id
 
 
+class accessory(models.Model):
+    car_id = models.OneToOneField(inventory,on_delete = models.CASCADE)
+    spoiler = models.BooleanField(default = False)
+    bumper = models.BooleanField(default = False)
+    car_cover = models.BooleanField(default = False)
+    car_mat = models.BooleanField(default = False)
 
 
 class employee(models.Model):

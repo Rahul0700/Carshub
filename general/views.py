@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render
-from .forms import Customerform,newsaleform,add_inventory
+from .forms import Customerform,newsaleform,add_inventory,add_accessory
 from accounts.models import customer,inventory,employee,color
 from random import randint
 from django.contrib import messages
@@ -100,15 +100,8 @@ def inventory_add(request):
             messages.success(request,'Car ID of Car is : %s'%code)
             upload_form.save()
             car = upload_form.car_id
-            """hidden = hidden.split(',')
-            #colour = color.objects.update_or_create( red = True )
-            for i in hidden:
-                if(i=='black'):
-                    color = color.objects.update_or_create( black = True)
-                elif(i=='blue'):
-                    color = color.objects.update_or_create( blue = True)
-                else:
-                    color = color.objects.update_or_create( red = True)"""
+            slug = code
+            return HttpResponseRedirect(reverse('general:add_accessories', kwargs = {'slug':slug}))
 
     else:
         form = add_inventory()
@@ -139,3 +132,16 @@ def inventory_alter(request):
             i.save()
     return render(request,'inventory.html',{ 'inventory': storage,
                                               'delete':storage})
+
+def accessories(request,slug):
+    if request.method == "POST":
+        form = add_accessory(data = request.POST)
+        print(slug)
+        if form.is_valid():
+            upload_form = form.save(commit = False)
+            car = inventory.objects.get(car_id=slug)
+            upload_form.car_id = car
+            upload_form.save()
+    else:
+        form = add_accessory()
+    return render(request,'general/add_accessories.html',{'form':form})

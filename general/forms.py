@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from accounts.models import customer,sales,inventory
+from accounts.models import customer,sales,inventory,accessory
 
 class Customerform(ModelForm):
     class Meta:
@@ -14,3 +14,8 @@ class add_inventory(ModelForm):
     class Meta:
         fields = ("model","built_year","is_petrol","is_testdrive","is_sold","price")
         model = inventory
+
+class add_accessory(ModelForm):
+    class Meta:
+        fields = ( "spoiler","bumper","car_cover","car_mat")
+        model = accessory
