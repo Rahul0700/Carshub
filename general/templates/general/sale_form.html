@@ -94,5 +94,7 @@
     {% endfor %}
    {% endif %}
     <br>
-    <a href="{% url 'general:alter_inventory' %}" style="color: black;"> Click here to make changes to inventory</a>
+    <a href="{% url 'general:alter_inventory' %}" style="color: black;"> Click here to update inventory</a>
+    <br>
+    <a href="{% url 'general:delete_inventory' %}" style="color: black;"> Click here to delete inventory</a>
   {% endblock %}

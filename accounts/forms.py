@@ -26,7 +26,7 @@ class employee_form_create(UserCreationForm):
 
 class employeeProfileForm(ModelForm):
     class Meta:
-        fields = ('contact','is_manager')
+        fields = ('contact','is_manager','address','blood_group')
         model = employee
 
 class employeedetails(ModelForm):

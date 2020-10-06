@@ -45,6 +45,23 @@ def employee_money(request):
         employee_form = employeedetails(data=request.POST)
         if employee_form.is_valid():
             info_form = employee_form.save(commit=False)
+            info_form.save()
     else :
         employee_form = employeedetails()
     return render(request,'accounts/employees.html',{'form': employee_form})
+
+"""
+try:
+    if employee_form.is_valid:
+        print( employee_form.errors)
+        info_form = employee_form.save(commit=False)
+        info_form.save()
+except:
+    if employee_form.is_valid():
+        id = request.POST.get("emp_id")
+        money = employee_performance.objects.get(emp_id = id)
+        print(money)
+        money.delete()
+        info_form = employee_form.save(commit=False)
+        info_form.save()
+"""

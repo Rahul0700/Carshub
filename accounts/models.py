@@ -34,6 +34,8 @@ class employee(models.Model):
     name = models.CharField(max_length = 40)
     contact = models.CharField(max_length=10,validators=[MinLengthValidator(10)])
     is_manager = models.BooleanField(default = False)
+    address = models.CharField(max_length = 250,  default="")
+    blood_group = models.CharField(max_length = 5, default="")
     def __str__(self):
         return self.name
 

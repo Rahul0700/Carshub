@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+
 # Create your views here.
 def customersignup(request):
     flag = "Yo"
@@ -109,7 +110,7 @@ def inventory_add(request):
 
 
 
-def inventory_alter(request):
+def inventory_delete(request):
 #inventory Deletion
     storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
     if request.method == "POST":
@@ -119,19 +120,18 @@ def inventory_alter(request):
         print(start)
         storage= inventory.objects.filter(built_year = start)
         print(storage)
-        #if(len(storage)==0):
         storage.delete()
+    return render(request,'inventory.html',{'inventory': storage})
 
-#inventory updation
-    if request.method =="GET":
+def inventory_alter(request):
+    if request.method =="POST":
         id = request.POST.get("id")
         mod_update = request.POST.get("mod_update")
         storage = inventory.objects.filter(car_id = id)
         for i in storage:
             i.model = mod_update
             i.save()
-    return render(request,'inventory.html',{ 'inventory': storage,
-                                              'delete':storage})
+    return render(request,'inventory_update.html')
 
 def accessories(request,slug):
     if request.method == "POST":

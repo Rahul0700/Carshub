@@ -1,3 +1,4 @@
+
 {% extends "base.html"%}
 {% block content %}
 <style>
@@ -36,14 +37,12 @@
                 background-color:lightskyblue;
             }
 </style>
-<br>
-    <h1 style="text-align:center;"> Inventory Deletion </h1>
-    <form method="POST">
-      {% csrf_token %}
-      <br>
-      Model Name:<input type = "text" name="model"><br><br>
-      Start year search:<input type = "number" name="start_year"><br><br>
-      <input type = "submit" style="background-color: blue;"><br>
-    </form>
-    <a href="{% url 'general:sales' %}" style="color: black;">Back to home </a>
-  {% endblock %}
+<h1 style="text-align: center;"> Inventory Updation</h1>
+<form method="POST">
+  {% csrf_token %}<br>
+  Car ID:<input type = "text" name = "id"><br><br>
+  New Model Name: <input type = "text" name = "mod_update"><br><br>
+  <input type = "submit" style="background-color: blue;"><br>
+</form>
+<a href="{% url 'general:sales' %}" style="color: black;">Back to home </a>
+{% endblock %}
