@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from .forms import Customerform,newsaleform,add_inventory,add_accessory
-from accounts.models import customer,inventory,employee,color
+from accounts.models import customer,inventory,employee,sales
 from random import randint
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -60,6 +60,8 @@ def addsale(request):
             for i in storage:
                 i.is_sold = True
                 i.save()
+            slug = code
+            return HttpResponseRedirect(reverse('general:add_accessories', kwargs = {'slug':slug}))
             #sold = inventory.objects.all()
     else:
         form = newsaleform()
@@ -101,8 +103,6 @@ def inventory_add(request):
             messages.success(request,'Car ID of Car is : %s'%code)
             upload_form.save()
             car = upload_form.car_id
-            slug = code
-            return HttpResponseRedirect(reverse('general:add_accessories', kwargs = {'slug':slug}))
 
     else:
         form = add_inventory()
@@ -139,8 +139,8 @@ def accessories(request,slug):
         print(slug)
         if form.is_valid():
             upload_form = form.save(commit = False)
-            car = inventory.objects.get(car_id=slug)
-            upload_form.car_id = car
+            sale = sales.objects.get(sale_id=slug)
+            upload_form.sale_id = sale
             upload_form.save()
     else:
         form = add_accessory()

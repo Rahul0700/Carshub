@@ -37,10 +37,7 @@
     <form method="post">
       {% csrf_token %}
       {{ form }}
-      Red  <input type="checkbox" value="red" name="red" class="color">
-      Black  <input type = "checkbox" value="black" name="black" class="color">
-      Blue <input type="checkbox" value="blue" name="blue" class="color">
-      <input type="text" hidden="True" value="" id="color_hidden" name="hidden_unit">
+
       <button type="submit" name="button" onclick = "qwert()" >Submit</button>
       <br>
       <a href="{% url 'general:sales' %}">Back to homepage</a>

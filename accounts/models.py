@@ -2,10 +2,6 @@ from django.db import models
 from django.core.validators import MinLengthValidator,MaxLengthValidator
 from django.contrib.auth.models import User
 # Create your models here.
-class color(models.Model):
-    red = models.BooleanField()
-    black = models.BooleanField()
-    blue = models.BooleanField()
 
 class inventory(models.Model):
     slug = models.SlugField(unique=True,null=True)
@@ -16,17 +12,12 @@ class inventory(models.Model):
     is_testdrive = models.BooleanField()
     is_sold = models.BooleanField()
     price = models.PositiveBigIntegerField()
-    color = models.OneToOneField(color, on_delete = models.CASCADE, null =True ,blank = True)
+    red = models.BooleanField(default = False)
+    black = models.BooleanField(default = False)
+    blue = models.BooleanField(default = False)
     def __str__(self):
         return self.car_id
 
-
-class accessory(models.Model):
-    car_id = models.OneToOneField(inventory,on_delete = models.CASCADE)
-    spoiler = models.BooleanField(default = False)
-    bumper = models.BooleanField(default = False)
-    car_cover = models.BooleanField(default = False)
-    car_mat = models.BooleanField(default = False)
 
 
 class employee(models.Model):
@@ -58,7 +49,19 @@ class sales(models.Model):
     sale_id = models.CharField(max_length = 6)
     date = models.DateField()
     model = models.CharField(max_length = 10)
-    price_sold = models.PositiveBigIntegerField()
     car_id = models.ForeignKey(inventory,on_delete = models.CASCADE)
     emp_id = models.ForeignKey(employee,on_delete = models. CASCADE)
     cus_id = models.ForeignKey(customer,on_delete = models.CASCADE)
+    price_sold = models.PositiveBigIntegerField()
+    discount = models.PositiveBigIntegerField(null=True)
+    reg_fees = models.PositiveBigIntegerField(null =True)
+    reg_number = models.CharField(max_length=10,default= "")
+    def __str__(self):
+        return self.sale_id
+
+class accessories(models.Model):
+    sale_id = models.OneToOneField(sales,on_delete = models.CASCADE)
+    spoiler = models.BooleanField(default = False)
+    bumper = models.BooleanField(default = False)
+    car_cover = models.BooleanField(default = False)
+    car_mat = models.BooleanField(default = False)
