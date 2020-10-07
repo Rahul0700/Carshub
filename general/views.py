@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
+
 # Create your views here.
 def customersignup(request):
     flag = "Yo"
@@ -71,21 +72,51 @@ def addsale(request):
         mod = request.GET.get("model")
         start = request.GET.get("start_year")
         end = request.GET.get("end_year")
-        storage = inventory.objects.filter(model = mod)
-        storage = storage.filter(built_year = start)
-        if(len(storage)==0):
-            search = True
-            messages.warning(request,"No inventory with these attributes")
-            for_sake = "Hey"
+        if(start != None):
+            print(start)
+            storage = inventory.objects.filter(model = mod)
+            try:
+                storage = storage.filter(built_year = start)
+            except:
+                print("Reached Except")
+            if(len(storage)==0):
+                search = True
+                messages.warning(request,"No inventory with these attributes")
+                for_sake = "Hey"
 
     return render(request,'general/sale_form.html',{'form':form,
                                                     'inventory': storage,
                                                     'is_manager': is_manager,
                                                     'for_sake': for_sake})
 
+# def inventory_add(request):
+#     if request.method == 'POST':
+#         #hidden = request.POST.get("hidden_unit")
+#         form = add_inventory(data=request.POST)
+#         if form.is_valid():
+#             upload_form = form.save(commit=False)
+#             integrity=False
+#             while(integrity==False):
+#                 random_code = randint(1000,9999)
+#                 code = 'CAR'+str(random_code)
+#                 try:
+#                     customer.objects.get(sale_id=code)
+#                     integrity = False
+#                 except :
+#                     integrity = True
+#             upload_form.sales = form
+#             upload_form.car_id  = code
+#             messages.success(request,'Car ID of Car is : %s'%code)
+#             upload_form.save()
+#             car = upload_form.car_id
+#
+#     else:
+#         form = add_inventory()
+#     return render(request,'general/add_inventory.html',{'form':form})
+
+
 def inventory_add(request):
     if request.method == 'POST':
-        #hidden = request.POST.get("hidden_unit")
         form = add_inventory(data=request.POST)
         if form.is_valid():
             upload_form = form.save(commit=False)
@@ -94,11 +125,10 @@ def inventory_add(request):
                 random_code = randint(1000,9999)
                 code = 'CAR'+str(random_code)
                 try:
-                    customer.objects.get(sale_id=code)
+                    inventory.objects.get(sale_id=code)
                     integrity = False
                 except :
                     integrity = True
-            upload_form.sales = form
             upload_form.car_id  = code
             messages.success(request,'Car ID of Car is : %s'%code)
             upload_form.save()
@@ -109,16 +139,12 @@ def inventory_add(request):
     return render(request,'general/add_inventory.html',{'form':form})
 
 
-
 def inventory_delete(request):
 #inventory Deletion
     storage = inventory.objects.raw('SELECT * FROM accounts_inventory')
     if request.method == "POST":
         mod = request.POST.get("model")
-        start = request.POST.get("start_year")
-        end = request.POST.get("end_year")
-        print(start)
-        storage= inventory.objects.filter(built_year = start)
+        storage= inventory.objects.filter(car_id = mod)
         print(storage)
         storage.delete()
     return render(request,'inventory.html',{'inventory': storage})

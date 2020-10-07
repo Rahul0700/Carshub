@@ -5,6 +5,7 @@ class Customerform(ModelForm):
     class Meta:
         fields = ("name","contact","address")
         model = customer
+    #Add to employee : "door_no","street","city","state","pin_code"
 class newsaleform(ModelForm):
     class Meta:
         fields = ("date","model","price_sold","car_id","emp_id","cus_id","discount","reg_fees",
