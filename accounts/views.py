@@ -4,6 +4,8 @@ from random import randint
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
+from .models import employee_performance
 # Create your views here.
 def employeesignup(request):
     if request.method == 'POST':
@@ -34,13 +36,16 @@ def employeesignup(request):
     else :
         employee_form = employee_form_create()
         employee_profile_form = employeeProfileForm()
-    return render(request,'accounts/employees.html',{'form': employee_form,
+    return render(request,'accounts/signup.html',{'form': employee_form,
                                                   'profile_form':employee_profile_form})
 
 def homepage(request):
     return render(request,'index.html')
 
 def employee_money(request):
+    money = employee_performance.objects.all()
+    for i in money:
+        print(i.emp_id)
     if request.method == 'POST':
         employee_form = employeedetails(data=request.POST)
         if employee_form.is_valid():
@@ -48,7 +53,8 @@ def employee_money(request):
             info_form.save()
     else :
         employee_form = employeedetails()
-    return render(request,'accounts/employees.html',{'form': employee_form})
+
+    return render(request,'accounts/employees.html',{'form': employee_form, 'money':money})
 
 """
 try:

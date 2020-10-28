@@ -36,46 +36,15 @@
                 background-color:lightskyblue;
             }
     </style>
-    <table class="table table-bordered" >
-      <thead>
-          <th> Employee ID </th>
-          <th> Sales </th>
-          <th> Target built </th>
-          <th> Current Commission </th>
-      <thead>
-      {% for invent in money %}
-    <tr>
-      <td> {{ invent.emp_id }}</td>
-      <td>{{ invent.month_sales }}</td>
-      <td>{{ invent.target }}</td>
-      <td>{{ invent.commission }}</td>
-    </tr>
-    {% endfor %}
 
-  </table>
 
     <form method="post"  enctype="multipart/form-data">
       <P id="intro">
-        Welcome Manager
+        Signup
       </P>
         {% csrf_token %}
         {{form.as_p}}
         {{ profile_form }}<br><br>
       <button type="submit" name="button">Submit</button>
-    </form><!--<!DOCTYPE html>
-      <html lang="en" dir="ltr">
-        <head>
-          <meta charset="utf-8">
-          <title></title>
-        </head>
-        <body>
-          <form method="post"  enctype="multipart/form-data">
-              {% csrf_token %}
-              {{form}}
-              {{ profile_form }}
-            <button type="submit" name="button">Submit</button>
-          </form>
-        </body>
-      </html>
-      -->
+    </form>
  {% endblock %}

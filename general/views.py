@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from .forms import Customerform,newsaleform,add_inventory,add_accessory
-from accounts.models import customer,inventory,employee,sales
+from accounts.models import customer,inventory,employee,sales,employee_performance
 from random import randint
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -39,11 +39,17 @@ def addsale(request):
     for_sake = "Nothing"
     current = employee.objects.get( emp_id = request.user )
     is_manager = current.is_manager
-    if request.method == 'POST':
+    if request.method == 'POST': 
         form = newsaleform(data=request.POST)
         if form.is_valid():
             upload_form = form.save(commit=False)
             integrity=False
+            print(upload_form.emp_id)
+            print(upload_form.date)
+            emp = employee_performance.objects.filter(emp_id = upload_form.emp_id )
+            for i in emp:
+                i.month_sales += upload_form.price_sold
+                i.save()
             while(integrity==False):
                 random_code = randint(1000,9999)
                 code = 'SEL'+str(random_code)

@@ -68,11 +68,12 @@ body {
 <body>
 
 <div class="topnav" id="myTopnav">
-  <a href="{% url 'home' %}" class="active">Home</a>
-  <a href="{% url 'accounts:employee_sign' %}">Sign-Up</a>
   {% if user.is_authenticated %}
+    <a href="{% url 'general:sales' %}" class="active">Home</a>
   <a href="{% url 'accounts:logout' %}">Log Out</a>
   {% else %}
+  <a href="{% url 'home' %}" class="active">Home</a>
+  <a href="{% url 'accounts:employee_sign' %}">Sign-Up</a>
   <a href="{% url 'accounts:login' %}">Login</a>
   <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 {% endif %}

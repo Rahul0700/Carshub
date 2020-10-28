@@ -33,7 +33,7 @@ class employee(models.Model):
     pin_code = models.CharField(max_length=6,validators=[MinLengthValidator(6)], null=True)
     blood_group = models.CharField(max_length = 5, default="")
     def __str__(self):
-        return self.name
+        return str(self.emp_id)
     def save(self, *args, **kwargs):
       self.address=self.door_no+", "+self.street+", "+self.city+", "+self.state+", "+self.pin_code
       super(employee, self).save(*args, **kwargs)

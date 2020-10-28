@@ -31,5 +31,5 @@ class employeeProfileForm(ModelForm):
 
 class employeedetails(ModelForm):
     class Meta:
-        fields = ('emp_id','month_sales','target','commission')
+        fields = ('emp_id','target','commission')
         model = employee_performance
